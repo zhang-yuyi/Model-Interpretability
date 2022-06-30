@@ -13,7 +13,7 @@
 **Permutation Feature Importance:** measure the importance of a feature by **calculating** the increase in the **model’s prediction error** after permuting the feature.
 ***Important feature***: if shuffling its values increases the model error, because in this case the model relied on the feature for the prediction
 
-<img src='https://github.com/zhang-yuyi/Model-Interpretability/blob/master/images/PFI.png' width=90%>
+<img src='images/PFI.png' width=100%>
 
 - Paper for reference:  [https://arxiv.org/pdf/1801.01489.pdf](https://arxiv.org/pdf/1801.01489.pdf) ()
 
@@ -28,7 +28,7 @@ error of the model**
 
 **Calculate on Training data VS on test data** 
 
-one-hot encoding
+
 
 
 ### **PDP:** for global feature behavior
@@ -50,7 +50,7 @@ Paper for reference:
 
 ### ALE
 
-change the feature value a liitle, average the changes of predictions, not the predictions itself.
+Accumulated Local Effects: change the feature value a little, average the changes of predictions, not the predictions itself.
 
 > **Partial Dependence Plots: “Let me show you what the model predicts on average when each data instance has the value v for that feature. I ignore whether the value v makes sense for all data instances.”
 ALE plots: “Let me show you how the model predictions change in a small”window" of the feature around v for data instances in that window."**
@@ -60,12 +60,11 @@ ALE plots: “Let me show you how the model predictions change in a small”wind
 
 |  | Pros | Cons | Use Case |
 | --- | --- | --- | --- |
-| SHAP value | -have solid theory -The feature contributions must add up to the difference of prediction for x and the average. -addictive | - suffers from inclusion of unrealistic data instances when features are correlated - computing consuming (can use TreeShap) |  |
-| PFI | -good interpretation -take into account interactions with other features | -If features are correlated, the permutation feature importance can be biased by unrealistic data instances. -Adding a correlated feature can decrease the importance of the associated feature by splitting the importance between both features. |  |
-| LightBGM feature importance |  |  |  |
-| PDP | intuitive / stright-forward  -can show the combined effects of two features  * show the average prediction | PDP with one or two feature variables may produce unrealistic datapoint | 1. want to see the total effect of the two feature 2. suitable for one-hot encoded categorical features |
-| ALE | not biased in case of correlated features *show the effects on prediction change (zero-centered) | can also fails when when features are strongly correlated. - it only makes sense to analyze the effect of changing both features together and not in isolation. | 1. want to describe how one feature influence the prediction
-2. suitable for numerical and label-encoded categorical features |
+| SHAP value | -have solid theory <br>-The feature contributions must add up to the difference of prediction for x and the average. -addictive | - suffers from inclusion of unrealistic data instances when features are correlated <br>- computing consuming (can use TreeShap) |  |
+| PFI | -good interpretation <br>-take into account interactions with other features | -If features are correlated, the permutation feature importance can be biased by unrealistic data instances. <br>-Adding a correlated feature can decrease the importance of the associated feature by splitting the importance between both features. |  |
+| LightBGM feature importance |  |may bias to numerical features  |  |
+| PDP | intuitive / stright-forward  <br>-can show the combined effects of two features  <br>* show the average prediction | PDP with one or two feature variables may produce unrealistic datapoint | 1. want to see the total effect of the two feature <br>2. suitable for one-hot encoded categorical features |
+| ALE | not biased in case of correlated features <br>faster than PDP <br>*show the effects on prediction change (zero-centered) | -can also fails when when features are strongly correlated. It only makes sense to analyze the effect of changing both features together and not in isolation. | 1. want to describe how one feature influence the prediction <br>2. suitable for numerical and label-encoded categorical features |
 
 ## Some **insights:**
 
