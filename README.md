@@ -7,13 +7,13 @@
 
 **SHAP value**: The essence of Shapley value is to measure the contributions to the final outcome from each player separately among the coalition. **to explain the prediction of an instance x by computing the contribution of each feature to the prediction. The SHAP explanation method computes Shapley values from coalitional game theory.**
 
-- Paper for reference: [https://arxiv.org/pdf/1706.06060.pdf](https://arxiv.org/pdf/1706.06060.pdf)   ***Consistent feature attribution for tree ensembles***
+- Paper for reference: [https://arxiv.org/pdf/1706.06060.pdf](https://arxiv.org/pdf/1706.06060.pdf)  
 - Introduction for reference: [https://christophm.github.io/interpretable-ml-book/shapley.html#the-shapley-value-in-detail](https://christophm.github.io/interpretable-ml-book/shapley.html#the-shapley-value-in-detail)
 
 **Permutation Feature Importance:** measure the importance of a feature by **calculating** the increase in the **model’s prediction error** after permuting the feature.
 ***Important feature***: if shuffling its values increases the model error, because in this case the model relied on the feature for the prediction
 
-<img src='https://github.com/zhang-yuyi/PDPbox/blob/master/images/pdp_plot.png' width=90%>
+<img src='https://github.com/zhang-yuyi/Model-Interpretability/blob/master/images/PFI.png' width=90%>
 
 - Paper for reference:  [https://arxiv.org/pdf/1801.01489.pdf](https://arxiv.org/pdf/1801.01489.pdf) ()
 
@@ -30,9 +30,6 @@ error of the model**
 
 one-hot encoding
 
-![Untitled](Monday%2091612ac690ee4cc4abe4abd1b739ad34/Untitled%201.png)
-
-![Untitled](Monday%2091612ac690ee4cc4abe4abd1b739ad34/Untitled%202.png)
 
 ### **PDP:** for global feature behavior
 
@@ -49,7 +46,7 @@ Assume features are independent.
 
 Paper for reference: 
 
-[A simple and effective model-based variable importance measure.pdf](Monday%2091612ac690ee4cc4abe4abd1b739ad34/A_simple_and_effective_model-based_variable_importance_measure.pdf)
+[https://arxiv.org/pdf/1805.04755.pdf](https://arxiv.org/pdf/1805.04755.pdf)
 
 ### ALE
 
@@ -63,20 +60,11 @@ ALE plots: “Let me show you how the model predictions change in a small”wind
 
 |  | Pros | Cons | Use Case |
 | --- | --- | --- | --- |
-| SHAP value | -have solid theory
--The feature contributions must add up to the difference of prediction for x and the average. -addictive | - suffers from inclusion of unrealistic data instances when features are correlated
-- computing consuming (can use TreeShap)
- |  |
-| PFI | -good interpretation
--take into account interactions with other features | -If features are correlated, the permutation feature importance can be biased by unrealistic data instances.
--Adding a correlated feature can decrease the importance of the associated feature by splitting the importance between both features. |  |
+| SHAP value | -have solid theory -The feature contributions must add up to the difference of prediction for x and the average. -addictive | - suffers from inclusion of unrealistic data instances when features are correlated - computing consuming (can use TreeShap) |  |
+| PFI | -good interpretation -take into account interactions with other features | -If features are correlated, the permutation feature importance can be biased by unrealistic data instances. -Adding a correlated feature can decrease the importance of the associated feature by splitting the importance between both features. |  |
 | LightBGM feature importance |  |  |  |
-| PDP | intuitive / stright-forward
-can show the combined effects of two features
-* show the average prediction | PDP with one or two feature variables may produce unrealistic datapoint | 1. want to see the total effect of the two feature
-2. suitable for one-hot encoded categorical features |
-| ALE | not biased in case of correlated features
-*show the effects on prediction change (zero-centered) | can also fails when when features are strongly correlated. - it only makes sense to analyze the effect of changing both features together and not in isolation. | 1. want to describe how one feature influence the prediction
+| PDP | intuitive / stright-forward  -can show the combined effects of two features  * show the average prediction | PDP with one or two feature variables may produce unrealistic datapoint | 1. want to see the total effect of the two feature 2. suitable for one-hot encoded categorical features |
+| ALE | not biased in case of correlated features *show the effects on prediction change (zero-centered) | can also fails when when features are strongly correlated. - it only makes sense to analyze the effect of changing both features together and not in isolation. | 1. want to describe how one feature influence the prediction
 2. suitable for numerical and label-encoded categorical features |
 
 ## Some **insights:**
